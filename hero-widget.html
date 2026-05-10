@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VeriPure Process Widget</title>
+  <style>
+    /* Reset & Base Variables */
+    :root {
+      --bg-color: #ffffff;
+      --text-main: #000000;
+      --text-muted: #666666;
+      --accent: #000000;
+      --line-color: #eaeaea;
+    }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: #f5f5f5; /* Subtle background to showcase the white widget */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    /* Widget Container */
+    .widget {
+      width: 100%;
+      max-width: 600px;
+      height: 500px;
+      background-color: var(--bg-color);
+      border-radius: 16px;
+      padding: 50px;
+      box-sizing: border-box;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.04), 0 1px 3px rgba(0,0,0,0.02);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    /* Individual Process Step */
+    .step {
+      display: flex;
+      position: relative;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1), transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .step.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .step:not(:last-child) {
+      padding-bottom: 45px;
+    }
+
+    /* Static background line */
+    .step:not(:last-child)::before {
+      content: '';
+      position: absolute;
+      left: 23px; /* Center of the 48px badge */
+      top: 48px;
+      bottom: 0;
+      width: 2px;
+      background-color: var(--line-color);
+      z-index: 1;
+    }
+
+    /* Animated filled line */
+    .step:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      left: 23px;
+      top: 48px;
+      width: 2px;
+      height: 0;
+      background-color: var(--accent);
+      z-index: 2;
+      transition: height 0.6s cubic-bezier(0.65, 0, 0.35, 1);
+    }
+
+    .step.animate-line:not(:last-child)::after {
+      height: calc(100% - 48px);
+    }
+
+    /* Step Number Badge */
+    .badge {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background-color: var(--bg-color);
+      border: 2px solid var(--line-color);
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 18px;
+      flex-shrink: 0;
+      z-index: 3;
+      position: relative;
+      transition: all 0.4s ease-out;
+    }
+
+    /* When a step becomes active */
+    .step.active .badge {
+      border-color: var(--accent);
+      background-color: var(--accent);
+      color: var(--bg-color);
+      box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.05);
+    }
+
+    /* Text Content */
+    .content {
+      margin-left: 24px;
+      padding-top: 12px;
+    }
+
+    .title {
+      margin: 0 0 6px 0;
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--text-main);
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+    }
+
+    .desc {
+      margin: 0;
+      font-size: 16px;
+      color: var(--text-muted);
+      line-height: 1.5;
+      font-weight: 400;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="widget" id="widget">
+    <!-- Step 1 -->
+    <div class="step">
+      <div class="badge">1</div>
+      <div class="content">
+        <h3 class="title">Submit</h3>
+        <p class="desc">User submits a supplement product for testing.</p>
+      </div>
+    </div>
+    
+    <!-- Step 2 -->
+    <div class="step">
+      <div class="badge">2</div>
+      <div class="content">
+        <h3 class="title">Lab Test</h3>
+        <p class="desc">Independent labs analyze purity, potency, and label accuracy.</p>
+      </div>
+    </div>
+    
+    <!-- Step 3 -->
+    <div class="step">
+      <div class="badge">3</div>
+      <div class="content">
+        <h3 class="title">Report</h3>
+        <p class="desc">Verified results are published on the VeriPure directory.</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const steps = document.querySelectorAll('.step');
+      
+      // Sequential animation logic
+      steps.forEach((step, index) => {
+        // Fade in and activate the step
+        setTimeout(() => {
+          step.classList.add('visible');
+          step.classList.add('active');
+        }, index * 900 + 300); // 300ms, 1200ms, 2100ms
+
+        // Start drawing the connector line to the next step
+        if (index < steps.length - 1) {
+          setTimeout(() => {
+            step.classList.add('animate-line');
+          }, index * 900 + 600); 
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
