@@ -1,20 +1,33 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# VeriPure - Supplement Testing Platform
 
-# Run and deploy your AI Studio app
+VeriPure is a modern, independent testing platform dedicated to verifying the purity, potency, and label accuracy of health supplements. The application serves as a directory where users can transparently view detailed lab reports for popular health and fitness products.
 
-This contains everything you need to run your app locally.
+## Features
+- **Product Directory**: Browse and filter through verified supplement records (Creatine, Whey, Pre-Workout, etc.).
+- **Dynamic Lab Reports**: Automatically generated and downloadable PDF lab reports for each product using `jsPDF`.
+- **Responsive UI**: A fully responsive, modern design with a built-in animated process widget, built with Tailwind CSS.
+- **Dark/Light Mode**: First-class support for both light and dark themes.
+- **Animations**: Smooth page transitions and element reveals powered by Framer Motion.
 
-View your app in AI Studio: https://ai.studio/apps/2aab5a1d-f532-4787-bf87-209a65a1adac
+## Tech Stack
+- **Framework**: React with Vite
+- **Styling**: Tailwind CSS
+- **Components**: Radix UI / shadcn/ui patterns
+- **Animation**: Framer Motion
+- **Utilities**: Lucide React (icons), jsPDF (report generation)
 
 ## Run Locally
 
-**Prerequisites:**  Node.js
+**Prerequisites:** Node.js (v18 or higher recommended)
 
+1. Clone the repository and install dependencies:
+   ```bash
+   npm install
+   ```
+2. Start the development server:
+   ```bash
+   npm run dev
+   ```
+3. Open your browser and navigate to `http://localhost:5173` (or the port provided in your terminal).
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+No API keys or external services are required to run this application!
